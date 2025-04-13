@@ -15,6 +15,14 @@ sound FoolBelieves
 {
     clip = sound/FoolBelieves.ogg,
     category = Music,
-    volume = 0.8,
+    volume = 1.0,
+    loop = false
+}
+
+sound ODST
+{
+    clip = sound/ODST.ogg,
+    category = Music,
+    volume = 1.0,
     loop = false
 }

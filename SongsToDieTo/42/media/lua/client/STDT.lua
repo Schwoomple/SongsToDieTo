@@ -5,10 +5,11 @@ local config = require("STDToptions")
 -- Grabs songs from STDT_Sounds.txt given their name
 local songList = {
     "HappyXmas",
-    "FoolBelieves"
+    "FoolBelieves",
+    "ODST"
 }
 
-local hasSpawnedOnce = false
+local hasSpawnedOnce = {}
 local sequenceIndex = 1
 
 -- Functionally does nothing as of now.
@@ -63,11 +64,16 @@ end)
 
 Events.OnPlayerDeath.Add(STDT.playMusic) -- hooks into death event and plays music
 
--- Only stops song IF the player dies and not on first creation (since the song isnt playing then anyway)
-if hasSpawnedOnce then
-    Events.OnCreatePlayer.Add(STDT.stopMusic)
-else
-    hasSpawnedOnce = true
-end
+-- Only stops song IF the player dies atleast once and not on first creation(to avoid premature initialization)
+Events.OnCreatePlayer.Add(function(playerIndex, player)
+    print("[CORE] OnCreatePlayer triggered for playerIndex: " .. playerIndex) -- Debugging
+    if hasSpawnedOnce[playerIndex] then
+        print("[CORE] Player " .. playerIndex .. " already spawned once. Stopping music.") -- Debugging
+        STDT.stopMusic()
+    else
+        print("[CORE] Player " .. playerIndex .. " first time spawning.") -- Debugging
+        hasSpawnedOnce[playerIndex] = true
+    end
+end)
 
 print("[CORE] Death music script loaded.") -- Console logging
