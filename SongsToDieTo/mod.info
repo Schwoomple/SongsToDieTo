@@ -1,0 +1,5 @@
+name=Songs To Die To
+poster=poster.png
+id=SongsToDieTo
+description=A configurable death music mod.
+script=STDT_Sounds

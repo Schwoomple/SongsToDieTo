@@ -1,0 +1,12 @@
+imports
+{
+    Base
+}
+
+sound HappyXmas
+{
+    clip = sound/HappyXmas.ogg,
+    volume = 0.8,
+    category = Music,
+    loop = false
+}
